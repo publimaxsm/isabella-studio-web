@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   ISABELLA STUDIO — Design tokens
+   Modo claro: Paleta Opción 1 "Lujo orgánico y cálido"
+   Modo oscuro: derivado del logo dorado sobre negro
+   Contrastes verificados WCAG AA (ver docs/ESTRUCTURA.md)
+   ========================================================================== */
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root,
+[data-theme="light"] {
+  --bg: #f9f6f0;            /* marfil */
+  --surface: #ffffff;
+  --surface-2: #efe5dc;     /* beige suave */
+  --text: #362c27;          /* chocolate — 12.6:1 sobre marfil */
+  --text-muted: #6b6058;    /* 5.7:1 */
+  --accent: #c88a75;        /* terracota — solo decorativo */
+  --accent-text: #8e5644;   /* cobre profundo — 5.5:1, precios y enlaces */
+  --btn-bg: #362c27;
+  --btn-text: #f9f6f0;
+  --border: #e6d7cd;
+  --media: #f1e9e1;         /* fondo de fotos de producto */
+  --overlay: rgba(54, 44, 39, 0.38);
+  --shadow: 0 18px 50px -24px rgba(54, 44, 39, 0.35);
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #141110;            /* negro cálido */
+  --surface: #1e1a17;
+  --surface-2: #2a2420;
+  --text: #f3ece4;          /* 16:1 */
+  --text-muted: #a79c92;    /* 7:1 */
+  --accent: #c9a45c;        /* oro — 8:1 */
+  --accent-text: #d9b26a;
+  --btn-bg: #c9a45c;
+  --btn-text: #141110;
+  --border: #3a322c;
+  --media: #ece3d8;         /* "joyas sobre terciopelo": la foto sigue en crema */
+  --overlay: rgba(0, 0, 0, 0.6);
+  --shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.8);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--text);
+  --color-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-text);
+  --color-btn: var(--btn-bg);
+  --color-btn-ink: var(--btn-text);
+  --color-line: var(--border);
+  --color-media: var(--media);
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Jost", "Helvetica Neue", Arial, sans-serif;
+}
+
+@layer base {
+/* ---------- Base ---------- */
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-weight: 350;
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Transición suave SOLO al cambiar de modo (la clase se pone y se quita por JS) */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, fill 0.3s ease !important;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--btn-text);
+}
+
+:focus-visible {
+  outline: 1.5px solid var(--accent-text);
+  outline-offset: 3px;
+}
+
+}
+
+@layer components {
+/* ---------- Tipografía ---------- */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 450;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 48px;
+  padding: 0 1.75rem;
+  font-size: 12px;
+  font-weight: 450;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: var(--btn-bg); color: var(--btn-text); }
+.btn-primary:hover { opacity: 0.88; }
+.btn-ghost { border: 1px solid var(--text); color: var(--text); }
+.btn-ghost:hover { background: var(--text); color: var(--bg); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ---------- Emblema del logo (se tiñe con el color de acento del modo) ---------- */
+.emblem {
+  display: inline-block;
+  background-color: var(--accent);
+  -webkit-mask: url("/brand/emblema-mask.png") center / contain no-repeat;
+  mask: url("/brand/emblema-mask.png") center / contain no-repeat;
+}
+
+/* ---------- Utilidades ---------- */
+.container-lux {
+  width: 100%;
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 768px) {
+  .container-lux { padding-inline: 2.5rem; }
+}
+
+.hairline { border-color: var(--border); }
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+.field {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.75rem 1rem;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 15px;
+}
+.field::placeholder { color: var(--text-muted); opacity: 0.8; }
+.field:focus { outline: none; border-color: var(--accent-text); }
+
+}
+
+/* Aparición suave al cargar */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+.rise { animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+
+@keyframes slow-zoom {
+  from { transform: scale(1.06); }
+  to { transform: scale(1); }
+}
+.slow-zoom { animation: slow-zoom 9s ease-out both; }
+
+@keyframes ticker {
+  0%, 30% { transform: translateY(0); }
+  33%, 63% { transform: translateY(-33.333%); }
+  66%, 96% { transform: translateY(-66.666%); }
+  100% { transform: translateY(0); }
+}
+.ticker { animation: ticker 12s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rise, .slow-zoom, .ticker { animation: none; }
+  html { scroll-behavior: auto; }
+}
