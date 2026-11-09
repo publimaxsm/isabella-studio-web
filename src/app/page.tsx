@@ -10,6 +10,7 @@ import { site } from "@/data/site";
 import { reviews } from "@/data/reviews";
 import { getProductsByCollection } from "@/lib/catalog";
 import { Rail } from "@/components/ui/Rail";
+import { asset } from "@/lib/asset";
 
 
 /** Publicaciones DEMO de Instagram (se reemplazan por el feed real) */
@@ -67,7 +68,7 @@ export default function HomePage() {
         <div className="grid items-center gap-10 overflow-hidden rounded-[28px] bg-surface md:grid-cols-2 md:gap-0">
           <div className="relative aspect-[4/5] md:aspect-auto md:h-full md:min-h-[620px]">
             {/* eslint-disable-next-line @next/next/no-img-element -- export estático */}
-            <img src="/img/editorial-vertical-1.jpg" alt="Editorial Isabella Studio en la costa de Falcón" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+            <img src={asset("/img/editorial-vertical-1.jpg")} alt="Editorial Isabella Studio en la costa de Falcón" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
           </div>
           <div className="px-7 pb-12 md:px-16 md:py-16">
             <p className="eyebrow">Nuestra historia</p>
@@ -127,7 +128,7 @@ export default function HomePage() {
           {igPosts.map((post, i) => (
             <a key={i} href={site.instagram} target="_blank" rel="noreferrer" className="group relative block aspect-[4/5] overflow-hidden rounded-[22px]">
               {/* eslint-disable-next-line @next/next/no-img-element -- export estático */}
-              <img src={`/img/${post.src}`} alt={post.caption} draggable={false} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" style={{ objectPosition: post.pos }} loading="lazy" />
+              <img src={asset(`/img/${post.src}`)} alt={post.caption} draggable={false} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" style={{ objectPosition: post.pos }} loading="lazy" />
               <span className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/0 to-black/0" />
               <span className="absolute top-4 right-4 grid h-9 w-9 place-items-center rounded-full bg-white/85 text-[#362C27]">
                 <InstagramIcon size={18} />

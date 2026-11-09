@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "@/components/ui/Icons";
+import { asset } from "@/lib/asset";
 
 export function Hero() {
   return (
@@ -8,7 +9,7 @@ export function Hero() {
         <div className="relative isolate overflow-hidden rounded-[28px] md:rounded-[36px]">
           {/* eslint-disable-next-line @next/next/no-img-element -- export estático */}
           <img
-            src="/img/hero-mar.jpg"
+            src={asset("/img/hero-mar.jpg")}
             alt="Isabella Studio — editorial frente al mar en Falcón"
             className="slow-zoom absolute inset-0 -z-10 h-full w-full object-cover object-[70%_center]"
             fetchPriority="high"

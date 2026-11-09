@@ -14,6 +14,7 @@ import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
 import { ShopProvider } from "@/components/providers/ShopProvider";
 import { SearchOverlay } from "@/components/search/SearchOverlay";
 import { themeScript } from "@/components/theme/ThemeToggle";
+import { asset } from "@/lib/asset";
 
 export const metadata: Metadata = {
   title: {
@@ -38,7 +39,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         {/* Aplica modo claro/oscuro ANTES de pintar: sin parpadeo */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="min-h-dvh">
+      <body className="min-h-dvh" style={{ ["--emblem-url" as string]: `url("${asset("/brand/emblema-mask.png")}")` }}>
         <ShopProvider>
           <a href="#contenido" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:rounded-full focus:bg-btn focus:px-4 focus:py-2 focus:text-btn-ink">
             Saltar al contenido

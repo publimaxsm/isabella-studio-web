@@ -9,7 +9,13 @@ const isStaticExport = process.env.STATIC_EXPORT === "1";
 
 const nextConfig: NextConfig = {
   ...(isStaticExport
-    ? { output: "export", trailingSlash: true, images: { unoptimized: true } }
+    ? {
+        output: "export",
+        trailingSlash: true,
+        images: { unoptimized: true },
+        // Subcarpeta para GitHub Pages (NEXT_PUBLIC_BASE_PATH=/isabella-studio-demo)
+        basePath: process.env.NEXT_PUBLIC_BASE_PATH || undefined,
+      }
     : {}),
   // Cache Components / Partial Prefetching requieren servidor: se apagan en el export estático
   cacheComponents: !isStaticExport,

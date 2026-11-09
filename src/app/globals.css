@@ -143,8 +143,8 @@ html.theme-transition *::after {
 .emblem {
   display: inline-block;
   background-color: var(--accent);
-  -webkit-mask: url("/brand/emblema-mask.png") center / contain no-repeat;
-  mask: url("/brand/emblema-mask.png") center / contain no-repeat;
+  -webkit-mask: var(--emblem-url) center / contain no-repeat;
+  mask: var(--emblem-url) center / contain no-repeat;
 }
 
 /* ---------- Utilidades ---------- */
